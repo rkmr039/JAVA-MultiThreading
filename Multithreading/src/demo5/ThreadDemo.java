@@ -34,16 +34,17 @@ class Customer implements Runnable{
 	@Override
 	public void run() {
 		Scanner kb = new Scanner(System.in);
-		System.out.println(this.name + " Enter amount to withdraw : ");
-		int amt = kb.nextInt();
 		
+		synchronized(account) {
+			System.out.println(this.name + " Enter amount to withdraw : ");
+			int amt = kb.nextInt();
 		if(account.isSufficientBalance(amt)) {
 			System.out.println(this.name );
 			account.withdraw(amt);
 		}
 		else {
 			System.out.println("Insufficient Balance ");
-		}
+		}}
 		
 	}
 }
