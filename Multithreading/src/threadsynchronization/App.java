@@ -1,8 +1,5 @@
 package threadsynchronization;
 
-// use of volatile keyword
-
-
 import java.util.Scanner;
 
 class Processor extends Thread
@@ -39,7 +36,6 @@ public class App {
 		sc.nextLine();
 		
 		proc1.shutdown();
-		sc.close();
 	}
 
 }
