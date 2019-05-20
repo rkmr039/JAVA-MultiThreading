@@ -36,6 +36,7 @@ public class App {
 		sc.nextLine();
 		
 		proc1.shutdown();
+		sc.close();
 	}
 
 }
