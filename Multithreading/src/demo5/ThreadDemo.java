@@ -46,6 +46,8 @@ class Customer implements Runnable{
 			System.out.println("Insufficient Balance ");
 		}}
 		
+		kb.close();
+		
 	}
 }
 public class ThreadDemo {
