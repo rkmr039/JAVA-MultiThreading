@@ -17,10 +17,12 @@ public class App {
 	
 	public static void main(String []args) {
 		
+		final Processor processor = new Processor();
+		
 		Thread t1 = new Thread(new Runnable() {
 			public void run() {
 				try {
-					producer();
+					processor.produce();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -30,7 +32,7 @@ public class App {
 		Thread t2 = new Thread(new Runnable() {
 			public void run() {
 				try {
-					consumer();
+					processor.consume();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
