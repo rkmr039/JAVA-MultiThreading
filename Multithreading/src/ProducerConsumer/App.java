@@ -1,6 +1,5 @@
 package ProducerConsumer;
 
-import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -17,7 +16,7 @@ public class App {
 	
 	public static void main(String []args) {
 		
-		final Processor processor = new Processor();
+		final SimpleProcessor processor = new SimpleProcessor();
 		
 		Thread t1 = new Thread(new Runnable() {
 			public void run() {
@@ -54,31 +53,24 @@ public class App {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		
+		}		
 	}
 	
-	private static void producer() throws InterruptedException {
-		Random random = new Random();
-		
-		while(true) {
-			queue.put(random.nextInt(100));
-		}
-	}
-	
-	private static void consumer() throws InterruptedException {
-		Random random = new Random();
-		while(true) {
-			Thread.sleep(100);
-			
-			if(random.nextInt(10) == 0) {
-				Integer value = queue.take();
-				System.out.println("Taken value : "+ value + " QueueSize is : " + queue.size());
-				
-			}
-			
-		}
-	}
-
+	/*
+	 * private static void producer() throws InterruptedException { Random random =
+	 * new Random();
+	 * 
+	 * while(true) { queue.put(random.nextInt(100)); } }
+	 * 
+	 * private static void consumer() throws InterruptedException { Random random =
+	 * new Random(); while(true) { Thread.sleep(100);
+	 * 
+	 * if(random.nextInt(10) == 0) { Integer value = queue.take();
+	 * System.out.println("Taken value : "+ value + " QueueSize is : " +
+	 * queue.size());
+	 * 
+	 * }
+	 * 
+	 * } }
+	 */
 }

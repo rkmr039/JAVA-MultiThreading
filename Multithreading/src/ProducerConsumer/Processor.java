@@ -19,7 +19,7 @@ public class Processor {
 			System.out.println("Resumed...");
 		}
 	} 
-public void consume() throws InterruptedException{
+	public void consume() throws InterruptedException{
 		
 	Scanner sc = new Scanner(System.in);
 	Thread.sleep(2000);
@@ -27,10 +27,7 @@ public void consume() throws InterruptedException{
 			System.out.println("Waiting for Return key.....");
 			sc.nextLine();
 			System.out.println("Return key pressed... ");
-			notify();
-			
-			
-			
+			notify();			
 		}
 	}
 
