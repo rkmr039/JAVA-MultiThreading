@@ -5,8 +5,9 @@ public class App {
 	public static void main(String args[]) throws InterruptedException{
 		
 	
-	final Runner runner = new Runner();
+	 // final Runner runner = new Runner();
 	
+		final AccountRunner runner = new AccountRunner();
 	Thread t1 = new Thread(new Runnable() {
 		public void run() {
 			try {
