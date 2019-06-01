@@ -14,10 +14,10 @@ public static void main(String args[]) {
 	
 	
 	
-	Future<Integer> future = executor.submit(new Callable<Integer>() { 
+	Future<?> future = executor.submit(new Callable<Void>() { 
 
 		@Override
-		public Integer call() throws Exception {
+		public Void call() throws Exception {
 			
 					
 					Random random = new Random();
@@ -38,7 +38,7 @@ public static void main(String args[]) {
 					
 					System.out.println("Finished...");
 					
-					return duration;
+					return null;
 				}		
 	});
 	executor.shutdown();
