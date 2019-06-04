@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingWorker;
 
 public class MainFrame extends JFrame {
 	
@@ -24,11 +25,7 @@ public class MainFrame extends JFrame {
 		
 		gc.fill = GridBagConstraints.NONE;
 		
-		gc.gridx =0;
-		gc.gridy = 0;
-		gc.weightx = 1;
-		gc.weighty = 1;
-		add(count1,gc);
+		
 		
 		startButton.addActionListener(new ActionListener() {
 			
@@ -38,6 +35,23 @@ public class MainFrame extends JFrame {
 				
 			}
 		});
+		gc.gridx =0;
+		gc.gridy = 0;
+		gc.weightx = 1;
+		gc.weighty = 1;
+		add(count1,gc);
+		
+		gc.gridx = 0;
+        gc.gridy = 1;
+        gc.weightx = 1;
+        gc.weighty = 1;
+		add(statusLabel,gc);
+		
+		gc.gridx = 0;
+	    gc.gridy = 2;
+	    gc.weightx = 1;
+	    gc.weighty = 1;
+		add(startButton,gc);
 		
 		setSize(200, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -49,8 +63,18 @@ public class MainFrame extends JFrame {
 	}
 
 	protected void start() {
-		System.out.println("Start..");
-		
+		SwingWorker<Void,Void> worker = new SwingWorker<Void, Void>(){
+
+			@Override
+			protected Void doInBackground() throws Exception {
+				for(int i =0;i<30;i++) {
+					Thread.sleep(100);
+					System.out.println("Hello "+ i);
+				}
+				return null;
+			}
+		};
+		worker.execute();
 	}
 
 }
