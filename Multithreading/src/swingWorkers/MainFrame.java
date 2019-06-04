@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.ExecutionException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -63,16 +64,34 @@ public class MainFrame extends JFrame {
 	}
 
 	protected void start() {
-		SwingWorker<Void,Void> worker = new SwingWorker<Void, Void>(){
+		SwingWorker<Boolean,Void> worker = new SwingWorker<Boolean, Void>(){
 
 			@Override
-			protected Void doInBackground() throws Exception {
+			protected Boolean doInBackground() throws Exception {
 				for(int i =0;i<30;i++) {
 					Thread.sleep(100);
 					System.out.println("Hello "+ i);
 				}
-				return null;
+				return true; // returned by get()
 			}
+
+			@Override
+			protected void done() {
+				//System.out.println("Done");
+				
+				try {
+					Boolean status = get();
+					statusLabel.setText("Completed with status "+status);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ExecutionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
 		};
 		worker.execute();
 	}
