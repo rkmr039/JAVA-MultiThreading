@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import javax.swing.JButton;
@@ -13,7 +14,7 @@ import javax.swing.SwingWorker;
 
 public class MainFrame extends JFrame {
 	
-	private JLabel count1 = new JLabel("0");
+	private JLabel countLabel1 = new JLabel("0");
 	private JLabel statusLabel = new JLabel("Task not completed");
 	private JButton startButton = new JButton("Start");
 	
@@ -40,7 +41,7 @@ public class MainFrame extends JFrame {
 		gc.gridy = 0;
 		gc.weightx = 1;
 		gc.weighty = 1;
-		add(count1,gc);
+		add(countLabel1,gc);
 		
 		gc.gridx = 0;
         gc.gridy = 1;
@@ -64,16 +65,27 @@ public class MainFrame extends JFrame {
 	}
 
 	protected void start() {
-		SwingWorker<Boolean,Void> worker = new SwingWorker<Boolean, Void>(){
+		SwingWorker<Boolean,Integer> worker = new SwingWorker<Boolean, Integer>(){
 
 			@Override
 			protected Boolean doInBackground() throws Exception {
 				for(int i =0;i<30;i++) {
 					Thread.sleep(100);
 					System.out.println("Hello "+ i);
+					
+					publish(i);
 				}
 				return true; // returned by get()
 			}
+
+			
+			@Override
+			protected void process(List<Integer> chunks) {
+				Integer value = chunks.get(chunks.size() - 1);
+				
+				countLabel1.setText("Current Value  "+ value);
+			}
+
 
 			@Override
 			protected void done() {
